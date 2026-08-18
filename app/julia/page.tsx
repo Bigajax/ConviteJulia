@@ -60,6 +60,23 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+function Icone({ children }: { children: React.ReactNode }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-[18px] w-[18px] shrink-0 text-ouro-escuro"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {children}
+    </svg>
+  );
+}
+
 function Ornamento() {
   return (
     <div aria-hidden className="flex items-center justify-center gap-3">
@@ -191,32 +208,51 @@ export default function PaginaConvite() {
                 </h2>
 
                 <dl className="mt-4 divide-y divide-lacre/15 border-y border-lacre/15">
-                  <div className="flex items-baseline gap-6 py-3">
-                    <dt className="w-20 shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
-                      Onde
+                  <div className="flex items-start gap-5 py-3">
+                    <dt className="flex w-28 shrink-0 items-center gap-2 pt-1 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
+                      <Icone>
+                        <path d="M12 21s-6-5.2-6-10a6 6 0 1 1 12 0c0 4.8-6 10-6 10z" />
+                        <circle cx="12" cy="11" r="2.2" />
+                      </Icone>
+                      <span>Onde</span>
                     </dt>
                     <dd className="text-base">
                       <address className="not-italic">{EVENTO.endereco}</address>
                     </dd>
                   </div>
-                  <div className="flex items-baseline gap-6 py-3">
-                    <dt className="w-20 shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
-                      Traje
+                  <div className="flex items-start gap-5 py-3">
+                    <dt className="flex w-28 shrink-0 items-center gap-2 pt-1 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
+                      <Icone>
+                        <path d="M9 4.5 4.5 7l1.7 3 2-1v10.5h7.6V9l2 1 1.7-3L15 4.5a3 3 0 0 1-6 0z" />
+                      </Icone>
+                      <span>Traje</span>
                     </dt>
                     <dd className="text-base">{EVENTO.traje}</dd>
                   </div>
-                  <div className="flex items-baseline gap-6 py-3">
-                    <dt className="w-20 shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
-                      Domingo
+                  <div className="flex items-start gap-5 py-3">
+                    <dt className="flex w-28 shrink-0 items-center gap-2 pt-1 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
+                      <Icone>
+                        <circle cx="12" cy="9" r="3" />
+                        <path d="M12 2.5v1.8M17 4.5l-1.3 1.3M21 9.5h-1.8M3 9.5h1.8M7 4.5l1.3 1.3" />
+                        <path d="M3 18c1.5-1.4 3-1.4 4.5 0s3 1.4 4.5 0 3-1.4 4.5 0 3 1.4 4.5 0" />
+                      </Icone>
+                      <span>Domingo</span>
                     </dt>
                     <dd className="text-base">{EVENTO.domingo}</dd>
                   </div>
                 </dl>
 
                 <details className="group border-b border-lacre/15">
-                  <summary className="flex cursor-pointer list-none items-baseline gap-6 py-3 [&::-webkit-details-marker]:hidden">
-                    <span className="w-20 shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
-                      Cardápio
+                  <summary className="flex cursor-pointer list-none items-start gap-5 py-3 [&::-webkit-details-marker]:hidden">
+                    <span className="flex w-28 shrink-0 items-center gap-2 pt-1 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
+                      <Icone>
+                        <path d="M4.5 16.5h15" />
+                        <path d="M5.5 16.5a6.5 6.5 0 0 1 13 0" />
+                        <path d="M12 9.5V8.3" />
+                        <circle cx="12" cy="7.5" r="1" />
+                        <path d="M3 19.5h18" />
+                      </Icone>
+                      <span>Cardápio</span>
                     </span>
                     <span className="flex-1 text-base italic text-ouro-escuro/80">
                       <span className="group-open:hidden">toque para ver</span>
