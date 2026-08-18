@@ -77,6 +77,38 @@ function Icone({ children }: { children: React.ReactNode }) {
   );
 }
 
+function IconeCurso({ curso }: { curso: string }) {
+  const nome = curso.toLowerCase();
+  if (nome.includes("sobremesa")) {
+    // torta com cereja
+    return (
+      <Icone>
+        <path d="M5 19h14" />
+        <path d="M6 19v-6a6 6 0 0 1 12 0v6" />
+        <path d="M12 7v2" />
+        <circle cx="12" cy="5.8" r="1.2" />
+      </Icone>
+    );
+  }
+  if (nome.includes("domingo") || nome.includes("churrasco")) {
+    // chama da churrasqueira
+    return (
+      <Icone>
+        <path d="M12 21c-3.3 0-5.5-2.2-5.5-5 0-2 1-3.6 2.5-5 .2 1 .8 1.8 1.8 2.3-.3-2.6.7-4.6 3.2-6.3 1.5 2 3.5 4.5 3.5 8 0 3.3-2.2 6-5.5 6z" />
+      </Icone>
+    );
+  }
+  // talheres do jantar
+  return (
+    <Icone>
+      <path d="M8 3v18" />
+      <path d="M6 3v4.5a2 2 0 0 0 4 0V3" />
+      <path d="M16.5 3v18" />
+      <path d="M16.5 3c2.3 2 2.3 6.5 0 8.5" />
+    </Icone>
+  );
+}
+
 function Ornamento() {
   return (
     <div aria-hidden className="flex items-center justify-center gap-3">
@@ -275,34 +307,53 @@ export default function PaginaConvite() {
                   </summary>
                   <div className="entra pb-5 pt-1">
                     {/* cartão de menu, como o impresso posto à mesa */}
-                    <div className="mx-auto max-w-[17rem] border border-ouro-escuro/30 px-6 pb-5 pt-4 text-center">
-                      <p className="font-pinyon text-3xl text-lacre">Menu</p>
-                      {EVENTO.cardapio.map((secao, i) => (
-                        <div key={secao.curso} className="mt-4">
-                          {i > 0 && (
-                            <div
-                              aria-hidden
-                              className="mx-auto mb-4 flex items-center justify-center gap-2"
-                            >
-                              <span className="h-px w-6 bg-ouro-escuro/30" />
-                              <span className="text-[0.5rem] text-ouro-escuro">
-                                ✦
-                              </span>
-                              <span className="h-px w-6 bg-ouro-escuro/30" />
-                            </div>
-                          )}
-                          <p className="text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-ouro-escuro">
-                            {secao.curso}
-                          </p>
-                          <ul className="mt-2 space-y-1">
-                            {secao.pratos.map((prato) => (
-                              <li key={prato} className="text-base">
-                                {prato}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
+                    <div className="mx-auto max-w-[17rem] border border-ouro-escuro/40 bg-[#FAF5E8] p-1 shadow-[0_14px_24px_-16px_rgba(42,22,26,0.45)]">
+                      <div className="border border-ouro-escuro/25 px-5 pb-5 pt-4 text-center">
+                        <p className="font-pinyon text-3xl text-lacre">Menu</p>
+                        {/* voluta caligráfica, eco do camafeu */}
+                        <svg
+                          viewBox="0 0 80 14"
+                          className="mx-auto mt-1 h-[14px] w-20 text-ouro-escuro"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.2"
+                          strokeLinecap="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M38 7C30 1 14 1 8 6c-3 2.5-1 6 2 5.5 2.5-.4 2.5-3.5.5-3.5" />
+                          <path d="M42 7c8-6 24-6 30-1 3 2.5 1 6-2 5.5-2.5-.4-2.5-3.5-.5-3.5" />
+                          <path d="M40 3.5 41.5 7 40 10.5 38.5 7z" fill="currentColor" stroke="none" />
+                        </svg>
+                        {EVENTO.cardapio.map((secao, i) => (
+                          <div key={secao.curso} className="mt-4">
+                            {i > 0 && (
+                              <div
+                                aria-hidden
+                                className="mx-auto mb-4 flex items-center justify-center gap-2"
+                              >
+                                <span className="h-px w-6 bg-ouro-escuro/30" />
+                                <span className="text-[0.5rem] text-ouro-escuro">
+                                  ✦
+                                </span>
+                                <span className="h-px w-6 bg-ouro-escuro/30" />
+                              </div>
+                            )}
+                            <span className="mx-auto flex w-fit items-center justify-center text-ouro-escuro">
+                              <IconeCurso curso={secao.curso} />
+                            </span>
+                            <p className="mt-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-ouro-escuro">
+                              {secao.curso}
+                            </p>
+                            <ul className="mt-2 space-y-1">
+                              {secao.pratos.map((prato) => (
+                                <li key={prato} className="text-base">
+                                  {prato}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </details>
