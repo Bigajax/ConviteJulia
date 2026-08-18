@@ -25,9 +25,9 @@ async function carregaFonte(familia: string): Promise<ArrayBuffer | null> {
 }
 
 export default async function ImagemOG() {
-  let foto: ArrayBuffer | null = null;
+  let lacre: ArrayBuffer | null = null;
   try {
-    foto = await fetch(new URL("./foto.jpg", import.meta.url)).then((r) =>
+    lacre = await fetch(new URL("./lacre.png", import.meta.url)).then((r) =>
       r.arrayBuffer()
     );
   } catch {}
@@ -124,26 +124,15 @@ export default async function ImagemOG() {
           </div>
         </div>
 
-        {foto ? (
-          <div
+        {lacre ? (
+          <img
+            src={lacre as unknown as string}
+            width={430}
+            height={449}
             style={{
-              display: "flex",
-              border: "2px solid #C9A45C",
-              borderRadius: "50%",
-              padding: 12,
+              filter: "drop-shadow(0 24px 32px rgba(0,0,0,0.45))",
             }}
-          >
-            <img
-              src={foto as unknown as string}
-              width={330}
-              height={430}
-              style={{
-                borderRadius: "50%",
-                objectFit: "cover",
-                objectPosition: "46% 22%",
-              }}
-            />
-          </div>
+          />
         ) : (
           <div style={{ color: "#C9A45C", fontSize: 120, display: "flex" }}>
             ✦
