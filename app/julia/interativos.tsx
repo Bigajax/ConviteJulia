@@ -8,7 +8,7 @@ import Image from "next/image";
 export function Lacre({ className = "" }: { className?: string }) {
   return (
     <Image
-      src="/lacre.png"
+      src="/lacre.webp"
       alt=""
       aria-hidden="true"
       width={600}

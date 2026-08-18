@@ -129,7 +129,7 @@ export default function PaginaConvite() {
                   </svg>
                   <div className="absolute left-1/2 top-1/2 h-48 w-[9.5rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[50%]">
                     <Image
-                      src="/julia.jpg"
+                      src="/julia.webp"
                       alt={`Foto da ${EVENTO.aniversariante}`}
                       width={640}
                       height={480}
