@@ -150,7 +150,7 @@ export default function PaginaConvite() {
                       height={480}
                       priority
                       className="h-full w-full object-cover"
-                      style={{ objectPosition: "46% 22%" }}
+                      style={{ objectPosition: "50% 30%" }}
                     />
                   </div>
                 </div>
