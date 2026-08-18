@@ -16,6 +16,21 @@ const EVENTO = {
   duracaoHoras: 3, // usada no evento da agenda (.ics)
   endereco: "R. Ana Gealh, 39 — Maringá/PR",
   traje: "Casual",
+  cardapio: [
+    {
+      curso: "Jantar de sábado",
+      pratos: [
+        "Lasanha à bolonhesa tradicional",
+        "Lasanha à bolonhesa de berinjela",
+        "Arroz",
+        "Salada",
+      ],
+    },
+    { curso: "Sobremesa", pratos: ["Torta sensação"] },
+    { curso: "Almoço de domingo", pratos: ["Churrasco"] },
+  ],
+  domingo:
+    "Almoço com piscina. Pode chegar cedo para aproveitar o sol e dar um mergulho.",
   recado: "Vem comemorar com a gente.",
   whatsapp: "5544997072891", // DDI + DDD + número, só dígitos
   mensagem:
@@ -172,12 +187,12 @@ export default function PaginaConvite() {
               {/* 3 · Detalhes */}
               <section className="entra mt-8" style={{ animationDelay: "240ms" }}>
                 <h2 className="text-center text-[0.7rem] font-semibold uppercase tracking-[0.4em] text-lacre">
-                  A noite
+                  A festa
                 </h2>
 
                 <dl className="mt-4 divide-y divide-lacre/15 border-y border-lacre/15">
                   <div className="flex items-baseline gap-6 py-3">
-                    <dt className="w-16 shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
+                    <dt className="w-20 shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
                       Onde
                     </dt>
                     <dd className="text-base">
@@ -185,12 +200,76 @@ export default function PaginaConvite() {
                     </dd>
                   </div>
                   <div className="flex items-baseline gap-6 py-3">
-                    <dt className="w-16 shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
+                    <dt className="w-20 shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
                       Traje
                     </dt>
                     <dd className="text-base">{EVENTO.traje}</dd>
                   </div>
+                  <div className="flex items-baseline gap-6 py-3">
+                    <dt className="w-20 shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
+                      Domingo
+                    </dt>
+                    <dd className="text-base">{EVENTO.domingo}</dd>
+                  </div>
                 </dl>
+
+                <details className="group border-b border-lacre/15">
+                  <summary className="flex cursor-pointer list-none items-baseline gap-6 py-3 [&::-webkit-details-marker]:hidden">
+                    <span className="w-20 shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-ouro-escuro">
+                      Cardápio
+                    </span>
+                    <span className="flex-1 text-base italic text-ouro-escuro/80">
+                      <span className="group-open:hidden">toque para ver</span>
+                      <span className="hidden group-open:inline">
+                        bom apetite
+                      </span>
+                    </span>
+                    <svg
+                      aria-hidden
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4 self-center text-ouro-escuro transition-transform duration-300 group-open:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </summary>
+                  <div className="entra pb-5 pt-1">
+                    {/* cartão de menu, como o impresso posto à mesa */}
+                    <div className="mx-auto max-w-[17rem] border border-ouro-escuro/30 px-6 pb-5 pt-4 text-center">
+                      <p className="font-pinyon text-3xl text-lacre">Menu</p>
+                      {EVENTO.cardapio.map((secao, i) => (
+                        <div key={secao.curso} className="mt-4">
+                          {i > 0 && (
+                            <div
+                              aria-hidden
+                              className="mx-auto mb-4 flex items-center justify-center gap-2"
+                            >
+                              <span className="h-px w-6 bg-ouro-escuro/30" />
+                              <span className="text-[0.5rem] text-ouro-escuro">
+                                ✦
+                              </span>
+                              <span className="h-px w-6 bg-ouro-escuro/30" />
+                            </div>
+                          )}
+                          <p className="text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-ouro-escuro">
+                            {secao.curso}
+                          </p>
+                          <ul className="mt-2 space-y-1">
+                            {secao.pratos.map((prato) => (
+                              <li key={prato} className="text-base">
+                                {prato}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </details>
 
                 <p className="mt-5 text-center text-lg italic text-lacre">
                   “{EVENTO.recado}”
