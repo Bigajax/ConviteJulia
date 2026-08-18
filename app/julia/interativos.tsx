@@ -239,6 +239,116 @@ export function Contagem({ alvoISO }: { alvoISO: string }) {
   );
 }
 
+/* ── Botão de confirmação com chuva de confetes ────────────────── */
+
+type Confete = {
+  dx: string;
+  dySobe: string;
+  dyCai: string;
+  rot: string;
+  dur: string;
+  atraso: string;
+  cor: string;
+  raio: string;
+  larg: number;
+  alt: number;
+};
+
+const CORES_CONFETE = ["#C9A45C", "#E8D5A8", "#6E1220", "#F4EDDE", "#8A6A32"];
+
+function geraConfetes(): Confete[] {
+  return Array.from({ length: 90 }, (_, i) => {
+    const larg = 6 + Math.random() * 5;
+    return {
+      dx: `${(Math.random() - 0.5) * 460}px`,
+      dySobe: `${-(50 + Math.random() * 260)}px`,
+      dyCai: `${130 + Math.random() * 260}px`,
+      rot: `${Math.random() * 840 - 420}deg`,
+      dur: `${1.1 + Math.random() * 0.7}s`,
+      atraso: `${Math.random() * 0.15}s`,
+      cor: CORES_CONFETE[i % CORES_CONFETE.length],
+      raio: Math.random() < 0.35 ? "50%" : "2px",
+      larg,
+      alt: larg * (0.9 + Math.random() * 0.8),
+    };
+  });
+}
+
+export function BotaoConfirmar({ href }: { href: string }) {
+  const [confetes, setConfetes] = useState<Confete[] | null>(null);
+  const [indo, setIndo] = useState(false);
+
+  const confirmar = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (indo) return;
+    setIndo(true);
+    const semMovimento = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (!semMovimento) setConfetes(geraConfetes());
+    setTimeout(
+      () => {
+        window.location.href = href;
+      },
+      semMovimento ? 250 : 1600
+    );
+  };
+
+  return (
+    <div className="relative">
+      {confetes && (
+        <div aria-hidden className="absolute inset-0 z-10">
+          {confetes.map((c, i) => (
+            <span
+              key={i}
+              className="confete"
+              style={
+                {
+                  "--dx": c.dx,
+                  "--dy-sobe": c.dySobe,
+                  "--dy-cai": c.dyCai,
+                  "--rot": c.rot,
+                  "--dur": c.dur,
+                  "--atraso": c.atraso,
+                  width: `${c.larg}px`,
+                  height: `${c.alt}px`,
+                  background: c.cor,
+                  borderRadius: c.raio,
+                } as React.CSSProperties
+              }
+            />
+          ))}
+        </div>
+      )}
+
+      <a
+        href={href}
+        onClick={confirmar}
+        aria-live="polite"
+        className="group relative flex min-h-14 w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-[#7D1624] to-[#55101B] px-6 text-lg font-semibold text-champanhe shadow-[0_16px_28px_-12px_rgba(36,5,11,0.8)] ring-1 ring-ouro/50 transition-transform active:scale-[0.98]"
+      >
+        {/* filete dourado interno, como a moldura do cartão */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-[3px] rounded-full border border-ouro/35"
+        />
+        {/* brilho que varre no hover */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
+        />
+        <span aria-hidden className="mr-3 text-xs text-ouro">
+          ✦
+        </span>
+        {indo ? "Nos vemos lá!" : "Confirmar presença"}
+        <span aria-hidden className="ml-3 text-xs text-ouro">
+          ✦
+        </span>
+      </a>
+    </div>
+  );
+}
+
 /* ── Botão de agenda (.ics) ────────────────────────────────────── */
 
 function paraFormatoICS(data: Date) {

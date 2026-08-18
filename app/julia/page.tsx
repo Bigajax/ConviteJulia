@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Contagem, ConviteSelado, Lacre } from "./interativos";
+import {
+  BotaoConfirmar,
+  Contagem,
+  ConviteSelado,
+  Lacre,
+} from "./interativos";
 
 // ─── CONFIG DO EVENTO ── edite só aqui ──────────────────────────────
 const EVENTO = {
@@ -198,12 +203,7 @@ export default function PaginaConvite() {
                 style={{ animationDelay: "360ms" }}
                 aria-label="Confirmar presença"
               >
-                <a
-                  href={LINK_WHATSAPP}
-                  className="flex min-h-14 w-full items-center justify-center rounded-full bg-lacre px-6 text-lg font-semibold text-champanhe transition-colors hover:bg-vinho"
-                >
-                  Confirmar presença
-                </a>
+                <BotaoConfirmar href={LINK_WHATSAPP} />
               </section>
 
               {/* o lacre reaparece como carimbo de despedida */}

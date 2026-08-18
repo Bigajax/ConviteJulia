@@ -115,6 +115,33 @@
   transition: opacity 0.4s ease;
 }
 
+/* Confetes do botão de confirmação: sobem em leque e caem girando */
+@keyframes confete {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(calc(-50% + var(--dx) * 0.7), calc(-50% + var(--dy-sobe)))
+      rotate(calc(var(--rot) * 0.6));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy-cai)))
+      rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+.confete {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  animation: confete var(--dur) cubic-bezier(0.2, 0.5, 0.4, 1) var(--atraso)
+    both;
+}
+
 /* Virada dos dígitos do cronômetro, como folha de calendário */
 @keyframes vira {
   from {
@@ -153,7 +180,8 @@
   .envelope-flutua,
   .brilho-selo,
   .cintila,
-  .vira {
+  .vira,
+  .confete {
     animation: none;
     transition: none;
   }
