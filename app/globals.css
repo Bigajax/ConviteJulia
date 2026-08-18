@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection {
+  background: #e8d5a8;
+  color: #3f0b14;
+}
+
+:focus-visible {
+  outline: 2px solid #e8d5a8;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Entrada do cartão: fade + translate, escalonada por seção */
+@keyframes entra {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.entra {
+  animation: entra 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Abertura do envelope ──────────────────────────────────────────
+   Sequência: o lacre se rompe → a aba levanta → o palco esvanece.
+   Os atrasos abaixo compõem a coreografia; o JS espera ~1.3s antes
+   de trocar para o cartão. */
+.palco-envelope {
+  perspective: 900px;
+}
+
+.selo {
+  transition:
+    transform 0.45s cubic-bezier(0.4, 0, 1, 1),
+    opacity 0.45s ease;
+}
+
+.selo:hover {
+  transform: scale(1.04);
+}
+
+.abrindo .selo {
+  transform: scale(1.25) rotate(-12deg);
+  opacity: 0;
+}
+
+.aba {
+  transform-origin: top center;
+  transition: transform 0.85s cubic-bezier(0.65, 0, 0.35, 1) 0.3s;
+}
+
+.abrindo .aba {
+  transform: rotateX(180deg);
+}
+
+.palco-selado {
+  transition: opacity 0.5s ease 0.85s;
+}
+
+.palco-selado.abrindo {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Vida no palco selado: envelope pousado no veludo, luz de vela no lacre,
+   estrelas cintilando ao fundo */
+@keyframes flutua {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.envelope-flutua {
+  animation: flutua 5s ease-in-out infinite;
+}
+
+.abrindo .envelope-flutua {
+  animation: none;
+}
+
+@keyframes pulso {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.brilho-selo {
+  background: radial-gradient(
+    circle,
+    rgba(232, 213, 168, 0.22) 0%,
+    transparent 65%
+  );
+  animation: pulso 3.4s ease-in-out infinite;
+}
+
+.abrindo .brilho-selo {
+  animation: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Virada dos dígitos do cronômetro, como folha de calendário */
+@keyframes vira {
+  from {
+    opacity: 0;
+    transform: translateY(-7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vira {
+  animation: vira 0.35s ease-out;
+}
+
+@keyframes cintila {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+.cintila {
+  animation: cintila 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entra,
+  .selo,
+  .aba,
+  .palco-selado,
+  .envelope-flutua,
+  .brilho-selo,
+  .cintila,
+  .vira {
+    animation: none;
+    transition: none;
+  }
+}
